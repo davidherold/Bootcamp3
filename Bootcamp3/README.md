@@ -1,10 +1,10 @@
 # Creating a server-side API module using Express
 ### Overview
-In Bootcamp# 1, we created a server to host our UF Directory App by implementing a primitive server-side router that responded to a single GET requests to '/listings' that retrieved our listings from a json file and sent the directory listingsto the client’s browser. 
+In Bootcamp# 1, we created a server to host our UF Directory App by implementing a primitive server-side router that responded to a single GET requests to '/listings' that retrieved our listings from a json file and sent the directory listings to the client’s browser. 
 
 In Bootcamp #2, we worked with MongoDB Atlas database (DBaaS) to make our listing data persistent. We setup communication between database (MongoDB Atlas) and server (node.js) using Mongoose as our connection driver.  We then created a database schema to organize the listings and we wrote a script `JSONtoMongo.js` to populate the database from the json file. We also created some test queries `queries.js` to ensure that our database worked.
 
-In this thrid bootcamp, we will add more functionality to this server by integreating in the CRUD functionality of Bootcamp #2 to create, read, update, and delete listings from a Mongo database as well as implement a server-side API that will allow us respond to http requests for creating, updating, and deleting listings from the client/browser. We will also use a 3rd party geocoding API, open cage data, to retreive latitude and longitude coordinates for new buidlings we add to this database. 
+In this thrid bootcamp, we will add more functionality to this server by integrating in the CRUD functionality of Bootcamp #2 to create, read, update, and delete listings from a Mongo database as well as implement a server-side API that will allow us respond to http requests for creating, updating, and deleting listings from the client/browser. We will also use a 3rd party geocoding API, open cage data, to retreive latitude and longitude coordinates for new buidlings we add to this database. 
 
 ## Introduction to Express & Middleware
 [***Express***](https://expressjs.com/) is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls. Middleware functions are functions that have access to the request object (req), the response object (res), and the next() middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named next.
@@ -137,7 +137,7 @@ Contact.findById(req.params.contact_id, function (err, contact) {
 };
 ```
 
-A core concept used to implement server-side controllers using Express for Node.js are [exports and export modules] ](https://www.freecodecamp.org/news/node-js-module-exports-vs-exports-ec7e254d63ac/). The module.exports or exports is a special object which is included in every JS file in the Node.js application by default. `module` is a variable that represents the current module and `exports` is an *object* that will be *exposed as a module*. So, whatever you assign to module.exports or exports, will be exposed as a module. Exports and export modules do the same work of providing you with a "convenience" variable that you can use across files in your application. 
+A core concept used to implement server-side controllers using Express for Node.js are [exports and export modules] ](https://www.freecodecamp.org/news/node-js-module-exports-vs-exports-ec7e254d63ac/). The module.exports or exports is a special object which is included in every JS file in the Node.js application by default. `module` is a variable that represents the current module and `exports` is an *object* that will be *exposed as a module*. So, whatever you assign to module.exports or exports, will be exposed as a module. Exports and export modules do the same work of providing you with a "convenience" variable that you can use across files in your application.
 
 The module.exports object is automatically created by Node.js. and gets returned from require(). *Note: Exports is NOT returned by require() module.exports is returned.* module.exports is just a reference to a plain JavaScript object and empty object by default. It is fine to [use it to represent many different programmatic constructs](https://tutorialsteacher.com/nodejs/nodejs-module-exports) (e.g., string literal, function, models etc). There are two ways we can use module.exports:
     - Attaching public methods to it 
@@ -163,7 +163,7 @@ var Listing = mongoose.model('Listing', listingSchema);
 /* Export the model to make it avaiable to other parts of your Node application */
 module.exports = Listing;
 ```
-In Bootcamp #3, exports is used to implemenet a set of functions in `listings.server.controller.js`. *Note:* Using just exports.functionName (e.g., exports.read and exports.update) is exporting the functionality as you go. No need for a big export module.exports function at the end of the file.
+In Bootcamp #3, exports is used to implement a set of functions in `listings.server.controller.js`. *Note:* Using just exports.functionName (e.g., exports.read and exports.update) is exporting the functionality as you go. No need for a big export module.exports function at the end of the file.
 ```javascript
 var mongoose = require('mongoose'), 
     Listing = require('../models/listings.server.model.js');
@@ -208,18 +208,18 @@ Navigate to `server/config/express.js`. This is where you will place code to con
 In `server/routes/listings.server.routes.js`, you will find code that specifies the request handlers for CRUD tasks. To learn more about the Express router, [go to this page](http://expressjs.com/en/guide/routing.html) and scroll down to the section on *express.Router.*
 
 ### Part 1 - Submit PDF in Canvas to Bootcamp #3
-Create a diagram of how the different parts of the server interact with one another and add descriptive text as needed to demonstrate your understanding of the functionality of each file and their relationships to each other. Specifially make note of: 
+Create a diagram of how the different parts of the server interact with one another and add descriptive text as needed to demonstrate your understanding of the functionality of each file and their relationships to each other. Specifially make note of:
    - the relationship between server.js, app.js, and express.js and the router file. With your starting point in the application being `server.js`
-    - how the router makes use of the controllers and model to determine the flow of request handling. Trace through each routes in `listings.server.routes.js` as the basis of your diagram. Consider makine a sequence diagram (http://www.agilemodeling.com/artifacts/sequenceDiagram.htm) to help you communicate the flow of calls and data. 
+   - how the router makes use of the controllers and model to determine the flow of request handling. Trace through each routes in `listings.server.routes.js` as the basis of your diagram. Consider making a sequence diagram (http://www.agilemodeling.com/artifacts/sequenceDiagram.htm) to help you communicate the flow of calls and data. 
    - the content defined in each controller and their roles in the application
-    - how middleware is used throughout the application to modularize the code (e.g., (application-level, routing, controller, etc)
+   - how middleware is used throughout the application to modularize the code (e.g., (application-level, routing, controller, etc)
    - the relationship between the test files and the missing functionality of the files you will need to update. What do they tell you need to do?
    
 ### Part 2 - Submit in GitHub
 This Bootcamp is an exercise in test driven development (TDD). When you first start this assignment all your test will most likely be failing. Your job is to write code to get tests to pass. Work on one test at a time. You will find it to be quite gratifying when your code passes a test. You should also try to make you own test cases and see if you can pass them. This is a really great practice to better understand the tests in these assignments and to test your understanding of how your code works. 
 
 #### To Do List
-1. Update your `config.s` file using the config.example.js
+1. Update your `config.js` file using the config.example.js
     - Add in your MongoDB Atlas URI
     - Sign-up for a free public key https://opencagedata.com/ and add it to your config file - This key will allow us to access open cage data's `geocoding api` to retreive coordinates for new buildings you add to the application.
 
@@ -252,9 +252,9 @@ This Bootcamp is an exercise in test driven development (TDD). When you first st
     (iii) Try also to test out your post and update requests
     - **run automated tests on your implementation** by running the mocha test found in the test folder `listings.server.routes.test.js` - some test may still fail. See notes in the test file to help resolve errors.
 
-5. Make sure your server is functioning correctly by starting it up by running the command `node server.js.` Manually **browser test your routes** try adding a test to create or update a listing and check the database to see if it is there. You may manually have to deleted the listing once you add it, unless you add a test to delete it.
+7. Make sure your server is functioning correctly by starting it up by running the command `node server.js.` Manually **browser test your routes** try adding a test to create or update a listing and check the database to see if it is there. You may manually have to deleted the listing once you add it, unless you add a test to delete it.
 
-6. Complete the `coordinates.server.controller.js` you will need to connect to opencagedata.com to lookup the address provided in the listing and add the latitude and longitude coordinates for the new listing you've added. This will require you to
+8. Complete the `coordinates.server.controller.js` you will need to connect to opencagedata.com to lookup the address provided in the listing and add the latitude and longitude coordinates for the new listing you've added. This will require you to
     - **construct a template for your request string** see open cage date [quickstart](https://opencagedata.com/api#quickstart) guide and [best practices](https://opencagedata.com/api#bestpractices) for string construction. 
     - Consider using **postman** to help you test out the right connection string format, see [open cage postman tutorial](https://opencagedata.com/tutorials/geocode-in-postman)
     - **parse the response** for the results you need: `latitude` & `longitude`. Note: `listins.server.controller.js` is using the `req.results` to update the listing. *Assumption:* For the purpose of this assignment, assume we find a match and the first result returned is our address. The results for building on campus aren't super robust in the open cage data. Resolving this issues is beyond this scope of this assignment. 

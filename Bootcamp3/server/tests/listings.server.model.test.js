@@ -24,6 +24,12 @@ listing =  {
   address: "1545 W University Ave, Gainesville, FL 32603, United States"
 }
 
+listing =  {
+  code: "HOME", 
+  name: "My place", 
+  address: "3301 SW 13th Street, Gainesville, FL 32608, United States"
+}
+
 describe('Listing Schema Unit Tests', function() {
 
   before(function(done) {
@@ -76,6 +82,15 @@ describe('Listing Schema Unit Tests', function() {
         done();
       })
     });
+
+    /*it('throws an error when code and name are not provided', function(done){
+      new Listing({
+        code: listing.code, name: listing.name
+      }).save(function(err){
+        should.exist(err);
+        done();
+      })
+    });*/
 
   });
 
